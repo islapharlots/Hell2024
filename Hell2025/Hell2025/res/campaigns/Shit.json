@@ -79,11 +79,10 @@
     },
     {
       "id": "escape",
-      "objective": "Escape the property.",
+      "objective": "Reach the exit and take the P90 from the weapon cache.",
       "condition": {
-        "type": "enter_volume",
-        "min": [55.0, 30.0, 46.0],
-        "max": [61.0, 38.0, 53.0]
+        "type": "inventory_has",
+        "item": "P90"
       }
     }
   ]
