@@ -47,6 +47,9 @@ Supported actions:
 - `lock_door`: lock all openable nodes on the door whose EditorName matches `target`.
 - `unlock_door`: unlock all openable nodes on the named door.
 - `play_audio`: play an existing audio asset by filename.
+- `spawn_pickup`: spawn an existing Bible item. Fields: `item`, `position`, optional `rotation`.
+- `spawn_enemy`: spawn `Dobermann`, `Kangaroo`, `Snake`, or `Shark`. Fields: `enemy`, `position`, optional `rotation`, optional `target` as the spawned editor name.
+- `load_map`: request another campaign map. Field: `target`.
 
 ## Editor naming
 
@@ -89,3 +92,34 @@ You can use a spatial trigger in later stages without adding a new map object:
 ```
 
 The condition succeeds when any living local player enters that world-space box.
+
+
+## Spawn example
+
+```json
+{
+  "type": "spawn_enemy",
+  "enemy": "Dobermann",
+  "target": "basement_hound",
+  "position": [34.0, 32.0, 38.0],
+  "rotation": [0.0, 1.57, 0.0]
+}
+```
+
+```json
+{
+  "type": "spawn_pickup",
+  "item": "SmallKeySilver",
+  "position": [41.0, 33.0, 35.0],
+  "rotation": [0.0, 0.0, 0.0]
+}
+```
+
+A map transition can be attached to a stage's `onComplete`:
+
+```json
+{
+  "type": "load_map",
+  "target": "ChapterTwo"
+}
+```
