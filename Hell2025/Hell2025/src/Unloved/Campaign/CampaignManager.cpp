@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 namespace Unloved::Campaign {
@@ -66,6 +67,7 @@ namespace Unloved::Campaign {
         }
 
         void ResetRuntimeState() {
+            g_campaign = CampaignData{};
             g_flags.clear();
             g_currentObjective.clear();
             g_currentStageId.clear();
@@ -92,7 +94,7 @@ namespace Unloved::Campaign {
                 if (door.GetEditorName() != editorName) continue;
 
                 found = true;
-                for (MeshNode& node : door.GetMeshNodes().GetNodes()) {
+                for (const MeshNode& node : door.GetMeshNodes().GetNodes()) {
                     if (node.openableId == 0) continue;
 
                     if (locked) {
