@@ -1,0 +1,90 @@
+{
+  "id": "the_house",
+  "title": "THE HOUSE",
+  "map": "Shit",
+  "completionMessage": "CHAPTER COMPLETE",
+  "stages": [
+    {
+      "id": "find_silver_key",
+      "objective": "Find the silver key.",
+      "condition": {
+        "type": "inventory_has",
+        "item": "SmallKeySilver"
+      },
+      "onEnter": [
+        {
+          "type": "message",
+          "text": "The property is quiet. Too quiet.",
+          "duration": 4.0
+        },
+        {
+          "type": "lock_door",
+          "target": "campaign_front_door"
+        }
+      ],
+      "onComplete": [
+        {
+          "type": "unlock_door",
+          "target": "campaign_front_door"
+        },
+        {
+          "type": "play_audio",
+          "audio": "Unlocked.wav"
+        }
+      ]
+    },
+    {
+      "id": "find_small_key",
+      "objective": "Search the house for another key.",
+      "condition": {
+        "type": "inventory_has",
+        "item": "SmallKey"
+      },
+      "onComplete": [
+        {
+          "type": "unlock_door",
+          "target": "campaign_basement_door"
+        }
+      ]
+    },
+    {
+      "id": "find_black_skull",
+      "objective": "Find what they hid below the house.",
+      "condition": {
+        "type": "inventory_has",
+        "item": "BlackSkull"
+      },
+      "onComplete": [
+        {
+          "type": "message",
+          "text": "You should not have touched it.",
+          "duration": 5.0
+        }
+      ]
+    },
+    {
+      "id": "arm_yourself",
+      "objective": "Find the Remington 870.",
+      "condition": {
+        "type": "inventory_has",
+        "item": "Remington870"
+      },
+      "onComplete": [
+        {
+          "type": "message",
+          "text": "Now get out.",
+          "duration": 4.0
+        }
+      ]
+    },
+    {
+      "id": "escape",
+      "objective": "Escape the property.",
+      "condition": {
+        "type": "enter_volume",
+        "min": [55.0, 30.0, 46.0],
+        "max": [61.0, 38.0, 53.0]
+      }
+    }
+  ]
+}
