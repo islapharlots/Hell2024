@@ -53,26 +53,21 @@ Supported actions:
 
 ## Editor naming
 
-Door actions use the existing **EditorName** field. For the included test campaign, name the relevant doors:
-
-```
-campaign_front_door
-campaign_basement_door
-```
-
-If a named door is not present, the campaign logs a warning and continues.
+Door actions use the existing **EditorName** field. The included test campaign currently targets TinyHouse's existing door names `Door` and `Door 6`. If a named door is not present, the campaign logs a warning and continues.
 
 ## Included test flow
 
-The starter THE HOUSE campaign uses existing engine items:
+The starter THE HOUSE campaign is wired directly to the current `Shit.map` + `TinyHouse.house` content:
 
-1. SmallKeySilver
-2. SmallKey
-3. BlackSkull
-4. Remington870
-5. P90 placed at the intended exit/weapon cache
+1. A SmallKeySilver is spawned outside and the existing front door (`Door`) is locked.
+2. Picking up the silver key unlocks the front door.
+3. The existing SmallKey inside TinyHouse unlocks the existing `Door 6`.
+4. A BlackSkull is spawned behind that locked area.
+5. The existing Remington870 becomes the next objective.
+6. Taking it spawns an exit Dobermann.
+7. A P90 is spawned at the escape cache; collecting it completes the chapter.
 
-Place these pickups where you want them with the existing editor. Put the P90 at the intended exit/weapon cache so collecting it ends the starter chapter.
+The supplied coordinates are a first-pass script against the current map data and are intentionally easy to tune in `res/campaigns/Shit.json`.
 
 ## Extending it
 
