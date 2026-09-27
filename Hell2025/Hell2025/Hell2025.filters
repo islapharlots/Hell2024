@@ -43,11 +43,11 @@
     <Filter Include="Header Files\Unloved\World\Objects\Interior\Piano">
       <UniqueIdentifier>{941AD83A-95EA-4ED9-936E-55381567B757}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\Unloved\Campaign\CampaignManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
