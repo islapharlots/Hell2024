@@ -10,6 +10,7 @@
 #include "Hell/UI/UIBackEnd.h"
 
 #include "Unloved/Bible/Bible.h"
+#include "Unloved/Campaign/CampaignManager.h"
 #include "Unloved/Config/Config.h"
 #include "Unloved/Debug/Debug.h"
 #include "Unloved/Debug/DebugDraw.h"
@@ -175,6 +176,7 @@ namespace Unloved {
         AStarMap::Update();
         Session::Update();
         World::UpdatePlayers();
+        Campaign::Update();
         BulletSystem::Update();
         if (EditorSession::IsInactive()) {
             World::UpdateEnemyMovement();

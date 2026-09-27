@@ -189,7 +189,9 @@ void Player::UpdateInteract() {
                 else if (pickUp->GetType() == ItemType::UNDEFINED) {
                     Logging::Warning() << "Player " << m_viewportIndex << " tried to pick up a PickUp with name '" << pickUp->GetName() << "' but type '" << Hell::Enum::ToString(pickUp->GetType()) << "'";
                 }
-                else if (pickUp->GetType() == ItemType::HEAL) {
+                else if (pickUp->GetType() == ItemType::HEAL ||
+                         pickUp->GetType() == ItemType::KEY ||
+                         pickUp->GetType() == ItemType::USELESS) {
                     m_inventory.AddInventoryItem(pickUp->GetName());
                 }
                 else {

@@ -2,6 +2,7 @@
 
 #include "Hell/Logging.h"
 #include "Unloved/World/World.h"
+#include "Unloved/Campaign/CampaignManager.h"
 
 #include <algorithm>
 #include <optional>
@@ -36,6 +37,13 @@ namespace Unloved::Session {
         g_gameMode = mode;
         g_sessionTime = 0.0f;
         World::NewRun(mapName);
+
+        if (mode == GameMode::CAMPAIGN) {
+            Campaign::StartForMap(mapName);
+        }
+        else {
+            Campaign::Stop();
+        }
     }
 
     void RequestNewGame(GameMode mode, const std::string& mapName) {

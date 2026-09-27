@@ -132,6 +132,13 @@ void Player::GiveDefaultLoadout() {
     // Always give knife
     m_inventory.GiveWeapon("Knife");
 
+    // Campaign starts deliberately lean. Keep the full arsenal for dev/deathmatch testing.
+    if (Session::GetGameMode() == GameMode::CAMPAIGN) {
+        m_inventory.GiveWeapon("Glock");
+        m_inventory.GiveAmmo(Bible::Ammo::GLOCK, 15);
+        return;
+    }
+
     // Dev load out
     m_inventory.GiveWeapon("Glock");
     m_inventory.GiveWeapon("GoldenGlock");

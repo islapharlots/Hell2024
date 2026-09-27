@@ -62,10 +62,10 @@ namespace Hell::CPUProfiler {
     Hell::CPUProfiler::FrameScope CPUProfilerConcat(_cpu_frame_, __COUNTER__)
 
 #define ProfilerCPUZone(label) \
-    Hell::CPUProfiler::ZoneScope CPUProfilerConcat(_cpu_zone_, __COUNTER__){ (label), __FILE__, __LINE__ }
+    Hell::CPUProfiler::ZoneScope CPUProfilerConcat(_cpu_zone_, __COUNTER__){ (label), __FILE__, static_cast<uint32_t>(__LINE__) }
 
 #define ProfilerCPUZoneFunction() \
-    Hell::CPUProfiler::ZoneScope CPUProfilerConcat(_cpu_zone_, __COUNTER__){ CPUProfilerFunctionSignature, __FILE__, __LINE__, true }
+    Hell::CPUProfiler::ZoneScope CPUProfilerConcat(_cpu_zone_, __COUNTER__){ CPUProfilerFunctionSignature, __FILE__, static_cast<uint32_t>(__LINE__), true }
 
 #else
 
