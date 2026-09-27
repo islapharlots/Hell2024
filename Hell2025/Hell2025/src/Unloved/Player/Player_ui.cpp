@@ -11,6 +11,7 @@
 #include "Unloved/Render/Renderer.h"
 
 #include "Unloved/Config/Config.h"
+#include "Unloved/Campaign/CampaignManager.h"
 #include "Unloved/Debug/Debug.h"
 #include "Unloved/Debug/DebugDraw.h"
 #include "Unloved/EditorSession/EditorSession.h"
@@ -72,6 +73,13 @@ void Player::UpdateUI(float deltaTime) {
     // Info text
     int infoTextX = xLeft + (width * 0.1f);
     int infoTextY = ammoY;
+
+    // Campaign objective
+    const std::string& campaignObjective = Campaign::GetCurrentObjective();
+    if (!campaignObjective.empty()) {
+        const std::string objectiveText = "[COL=0.839,0.784,0.635]OBJECTIVE\n" + campaignObjective;
+        UIBackEnd::BlitText(objectiveText, "RobotoCondensed", centerX, yTop + 48, Alignment::CENTERED_HORIZONTAL, 1.15f, TextureFilter::LINEAR);
+    }
 
     if (m_inventory.IsOpen()) {
         m_inventory.SubmitRenderItems();
