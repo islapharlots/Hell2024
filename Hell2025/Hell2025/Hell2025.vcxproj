@@ -247,6 +247,7 @@ xcopy /Y /I "$(ProjectDir)vendor\DLLs\*.dll" "$(TargetDir)"
     <ClCompile Include="src\Hell\Render\API\Vulkan\vk_types.cpp" />
     <ClCompile Include="src\Hell\ResourceManagement\Types\PointAnimation.cpp" />
     <ClCompile Include="src\Hell\ResourceManagement\Types\VAT.cpp" />
+    <ClCompile Include="src\Unloved\Campaign\CampaignManager.cpp" />
     <ClCompile Include="src\Unloved\Characters\Enemies\Snake\Snake.cpp" />
     <ClCompile Include="src\Unloved\Debug\Menu\Debug_menu_editor.cpp" />
     <ClCompile Include="src\Unloved\Debug\Menu\Debug_menu_game.cpp" />
@@ -802,6 +803,7 @@ xcopy /Y /I "$(ProjectDir)vendor\DLLs\*.dll" "$(TargetDir)"
     <ClInclude Include="src\Hell\ResourceManagement\Types\PointAnimation.h" />
     <ClInclude Include="src\Hell\ResourceManagement\Types\VAT.h" />
     <ClInclude Include="src\Hell\Serialization\Json.h" />
+    <ClInclude Include="src\Unloved\Campaign\CampaignManager.h" />
     <ClInclude Include="src\Unloved\Characters\Enemies\Snake\Snake.h" />
     <ClInclude Include="src\Unloved\Common\Constants.h" />
     <ClInclude Include="src\Unloved\Common\Enums.h" />
