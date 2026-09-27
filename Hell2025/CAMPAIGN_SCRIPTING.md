@@ -67,10 +67,25 @@ The starter THE HOUSE campaign uses existing engine items:
 2. SmallKey
 3. BlackSkull
 4. Remington870
-5. Escape volume
+5. P90 placed at the intended exit/weapon cache
 
-Place these pickups where you want them with the existing editor. Adjust the final escape volume in `res/campaigns/Shit.json` after choosing the actual exit location.
+Place these pickups where you want them with the existing editor. Put the P90 at the intended exit/weapon cache so collecting it ends the starter chapter.
 
 ## Extending it
 
 The campaign manager is intentionally small. The next natural action types are enemy spawning, light groups, map transitions, checkpoints/save state, and scripted object enable/disable.
+
+
+### Volume trigger example
+
+You can use a spatial trigger in later stages without adding a new map object:
+
+```json
+{
+  "type": "enter_volume",
+  "min": [10.0, 0.0, 10.0],
+  "max": [14.0, 4.0, 14.0]
+}
+```
+
+The condition succeeds when any living local player enters that world-space box.
