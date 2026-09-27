@@ -4,6 +4,8 @@
 #include "Hell/Logging.h"
 #include "Hell/Serialization/Json.h"
 
+#include "Unloved/Bible/Bible.h"
+#include "Unloved/Common/CreateInfo.h"
 #include "Unloved/Objects/House/Door.h"
 #include "Unloved/Objects/Renderables/MeshNodes.h"
 #include "Unloved/Player/Player.h"
@@ -34,6 +36,10 @@ namespace Unloved::Campaign {
             std::string target;
             std::string flag;
             std::string audio;
+            std::string item;
+            std::string enemy;
+            glm::vec3 position = glm::vec3(0.0f);
+            glm::vec3 rotation = glm::vec3(0.0f);
             bool value = true;
             float duration = 3.0f;
         };
@@ -128,6 +134,59 @@ namespace Unloved::Campaign {
             }
             else if (action.type == "play_audio") {
                 if (!action.audio.empty()) Hell::Audio::PlayAudio(action.audio, 1.0f);
+            }
+            else if (action.type == "spawn_pickup") {
+                const Bible::Item item = Bible::GetItemByName(action.item);
+                if (item == Bible::Item::UNDEFINED) {
+                    Logging::Warning() << "Campaign: unknown pickup item '" << action.item << "'\n";
+                    return;
+                }
+
+                PickUpCreateInfo createInfo;
+                createInfo.position = action.position;
+                createInfo.rotation = action.rotation;
+                createInfo.item = item;
+                createInfo.respawn = false;
+                createInfo.saveToFile = false;
+                createInfo.disablePhysicsAtSpawn = true;
+                World::AddPickUp(createInfo);
+            }
+            else if (action.type == "spawn_enemy") {
+                if (action.enemy == "Dobermann") {
+                    DobermannCreateInfo createInfo;
+                    createInfo.position = action.position;
+                    createInfo.rotation = action.rotation;
+                    createInfo.editorName = action.target.empty() ? "Campaign Dobermann" : action.target;
+                    World::AddDobermann(createInfo);
+                }
+                else if (action.enemy == "Kangaroo") {
+                    KangarooCreateInfo createInfo;
+                    createInfo.position = action.position;
+                    createInfo.rotation = action.rotation;
+                    createInfo.editorName = action.target.empty() ? "Campaign Kangaroo" : action.target;
+                    World::AddKangaroo(createInfo);
+                }
+                else if (action.enemy == "Snake") {
+                    SnakeCreateInfo createInfo;
+                    createInfo.position = action.position;
+                    createInfo.rotation = action.rotation;
+                    createInfo.editorName = action.target.empty() ? "Campaign Snake" : action.target;
+                    World::AddSnake(createInfo);
+                }
+                else if (action.enemy == "Shark") {
+                    SharkCreateInfo createInfo;
+                    createInfo.position = action.position;
+                    createInfo.editorName = action.target.empty() ? "Campaign Shark" : action.target;
+                    World::AddShark(createInfo);
+                }
+                else {
+                    Logging::Warning() << "Campaign: unknown enemy type '" << action.enemy << "'\n";
+                }
+            }
+            else if (action.type == "load_map") {
+                if (!action.target.empty()) {
+                    Session::RequestNewGame(GameMode::CAMPAIGN, action.target, Session::GetLocalPlayerCount());
+                }
             }
             else if (!action.type.empty()) {
                 Logging::Warning() << "Campaign: unknown action type '" << action.type << "'\n";
@@ -228,8 +287,21 @@ namespace Unloved::Campaign {
             action.target = json.value("target", "");
             action.flag = json.value("flag", "");
             action.audio = json.value("audio", "");
+            action.item = json.value("item", "");
+            action.enemy = json.value("enemy", "");
             action.value = json.value("value", true);
             action.duration = json.value("duration", 3.0f);
+
+            const auto positionIt = json.find("position");
+            if (positionIt != json.end() && positionIt->is_array() && positionIt->size() >= 3) {
+                action.position = positionIt->get<glm::vec3>();
+            }
+
+            const auto rotationIt = json.find("rotation");
+            if (rotationIt != json.end() && rotationIt->is_array() && rotationIt->size() >= 3) {
+                action.rotation = rotationIt->get<glm::vec3>();
+            }
+
             return action;
         }
 
